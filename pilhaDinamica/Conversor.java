@@ -4,12 +4,24 @@ import pilha.Pilha;
 
 public class Conversor {
     public static void main(String[] args) {
-        //int numero = Integer.parseInt(args[0]);
+
+        PilhaDin pilha = new PilhaDin();
+
+        pilha.push(1);
+        pilha.push(2);
+        pilha.push(3);
+
+        while (!pilha.isEmpty()) {
+            System.out.println("Valor: "+ pilha.pop());
+        }
+
+        /*//int numero = Integer.parseInt(args[0]);
         int numero = 172; // poderíamos usar um Scanner para informar o valor
         // PilhaDin p = new PilhaDin();
-        IPilha p = new PilhaDin();
+        PilhaDin p = new PilhaDin();
         // podemos executar diferentes estruturas com mesma interface (você pedir para escolher o tipo de pilha)
         int resto;
+
 
         while (numero != 0) {
             resto = numero % 2;// pega o resto da divisão deste número por 2 (vale 0 ou 1)
@@ -23,6 +35,7 @@ public class Conversor {
             System.out.print(resto);
         }
         System.out.println("\nFim do programa");
+        */
 
         //IPilh p;
         /*try{

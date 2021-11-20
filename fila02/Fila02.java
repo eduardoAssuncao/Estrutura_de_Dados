@@ -1,55 +1,70 @@
 package fila02;
 
 public class Fila02 {
-    Node cabeca;
-    Node inicio;
-    int tamanho;
+    private Node cabeca;
+    private Node inicio;
+    private int tamanho;
 
-    Fila02(){
+    Fila02() {
         cabeca = null;
         inicio = null;
         tamanho = 0;
     }
 
-    Object verificarCabeca(){
-        if (cabeca == null){
+    Object verificarCabeca() {
+        if (cabeca == null) {
             return null;
         }
-        return cabeca.info;
+        return cabeca.getInfo();
     }
 
-    boolean vazia(){
+    boolean vazia() {
         return inicio == null;
     }
 
-    void inserir(Object info){
+    void inserir(Object info) {
         Node no = new Node();
-        no.info = info;
-        no.proximo = inicio;
+        //no.info = info;
+        no.setInfo(info);
+        //no.proximo = inicio;
+        no.setProximo(inicio);
         inicio = no;
-        if (tamanho == 0){
+        if (tamanho == 0) {
             cabeca = no;
         }
         tamanho++;
     }
 
-    Object remover(){
-        if (vazia()){
+    Object remover() {
+        if (vazia()) {
             return null;
         }
-        Object info = cabeca.info;
-        if (tamanho == 1){ // ou inicio == cabeça
+        Object info = cabeca.getInfo();
+        if (tamanho == 1) { // ou inicio == cabeça
             inicio = null;
             cabeca = null;
         } else {
             Node local = inicio;
-            while (local.proximo != cabeca) {
-                local = local.proximo;
+            while (local.getProximo() != cabeca) {
+                local = local.getProximo();
             }
             cabeca = local;
-            cabeca.proximo = null;
+            cabeca.setProximo(null);
         }
-        tamanho --;
+        tamanho--;
         return info;
     }
+
+    public Object consultarElem(int id){
+        if (vazia()){
+            return null;
+        }
+        Node aux = inicio;
+        for(int i = 0; i < id; i++){
+            aux = aux.getProximo();
+        }
+        return aux.getInfo();
+    }
+
+    //colocar uma função que busque um objeto por meio de um indice
 }

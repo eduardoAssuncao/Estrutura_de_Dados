@@ -10,5 +10,11 @@ public class Execucao {
         while(!fila.vazia()){
             System.out.println(fila.remover());
         }
+
+        fila.inserir(4);
+        fila.inserir(5);
+        fila.inserir(6);
+
+        System.out.println("Consulta: "+ fila.consultarElem(0));
     }
 }

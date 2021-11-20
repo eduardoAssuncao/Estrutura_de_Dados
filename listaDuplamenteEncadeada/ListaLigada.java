@@ -1,5 +1,9 @@
 package listaDuplamenteEncadeada;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
 public class ListaLigada {
 
     //private Celula primeira;
@@ -10,17 +14,21 @@ public class ListaLigada {
 
     ///////////////////////////////////////
 
-    Node inicio;
-    Node fim;
-    int tamanho;
+    private Node inicio;
+    private Node fim;
+    private int tamanho;
 
     public void adiciona(Object info){ // adiciona no fim da lista
         Node no = new Node();
-        no.info = info;
-        no.anterior = null;
-        no.proximo = inicio;
+        //no.info = info;
+        no.setInfo(info);
+        //no.anterior = null;
+        no.setAnterior(null);
+        //no.proximo = inicio;
+        no.setProximo(inicio);
         if (inicio != null){
-            inicio.anterior = no;
+            //inicio.anterior = no;
+            inicio.setAnterior(no);
         }
         inicio = no;
         if (tamanho == 0){
@@ -33,10 +41,11 @@ public class ListaLigada {
         if (inicio == null){
             return null;
         }
-        Object out = inicio.info; // salva informação do inicio
-        inicio = inicio.proximo;
+        Object out = inicio.getInfo(); // salva informação do inicio
+        inicio = inicio.getProximo();
         if (inicio != null){
-            inicio.anterior = null;
+            //inicio.anterior = null;
+            inicio.setAnterior(null);
         }else{
             fim = null;
         }
@@ -46,11 +55,15 @@ public class ListaLigada {
 
     public void inserirFim(Object info){
         Node no = new Node(); // Alocação do No
-        no.info = info; // Colocar informação
-        no.proximo = null;
-        no.anterior = fim;
+        //no.info = info; // Colocar informação
+        no.setInfo(info);
+        //no.proximo = null;
+        no.setProximo(null);
+        //no.anterior = fim;
+        no.setAnterior(fim);
         if (fim != null){
-            fim.proximo = no;
+            //fim.proximo = no;
+            fim.setProximo(no);
         }
         fim = no;
         if (tamanho == 0){
@@ -63,10 +76,13 @@ public class ListaLigada {
         if(fim == null){
             return null;
         }
-        Object out = fim.info;
-        fim = fim.anterior;
+        //Object out = fim.info;
+        Object out = fim.getInfo();
+        //fim = fim.anterior;
+        fim = fim.getAnterior();
         if (fim != null){
-            fim.proximo = null;
+            //fim.proximo = null;
+            fim.setProximo(null);
         }else{
             inicio = null;
         }
@@ -82,14 +98,20 @@ public class ListaLigada {
         } else{
             Node local = inicio; // Local é tipo um Aux
             for (int i = 0; i < id - 1; i++){
-                local = local.proximo;
+                //local = local.proximo;
+                local = local.getProximo();
             }
             Node no = new Node();
-            no.info = info;
-            no.anterior = local;
-            no.proximo = local.proximo;
-            local.proximo = no;
-            no.proximo.anterior = no;
+            //no.info = info;
+            no.setInfo(info);
+            //no.anterior = local;
+            no.setAnterior(local);
+            //no.proximo = local.proximo;
+            no.setProximo(local.getProximo());
+            //local.proximo = no;
+            local.setProximo(no);
+            //no.proximo.anterior = no;
+            no.getProximo().setAnterior(no);
             tamanho++;
         }
     }
@@ -104,26 +126,56 @@ public class ListaLigada {
         }
         Node local = inicio;
         for (int i = 0; i < id; i++){
-            local = local.proximo;
+            //local = local.proximo;
+            local = local.getProximo();
         }
-        if (local.anterior != null){
-            local.anterior.proximo = local.proximo;
+        if (local.getAnterior() != null){
+            //local.anterior.proximo = local.proximo;
+            local.getAnterior().setProximo(local.getProximo());
         }
-        if (local.proximo != null){
-            local.proximo.anterior = local.anterior;
+        if (local.getProximo() != null){
+            //local.proximo.anterior = local.anterior;
+            local.getProximo().setAnterior(local.getAnterior());
         }
         tamanho--;
-        return local.info;
+        //return local.info;
+        return local.getInfo();
     }
 
     public String toString(){
         String str= "(" + tamanho + ") ";
         Node local = inicio;
         while(local != null){
-            str += local.info + " ";
-            local = local.proximo;
+            //str += local.info + " ";
+            str += local.getInfo() + " ";
+            //local = local.proximo;
+            local = local.getProximo();
         }
         return str;
+    }
+
+    public void lerArquivo(){
+        try{
+            FileInputStream arquivo = new FileInputStream("C:\\Users\\Kenny\\Documents\\IntelliJProjects\\src\\testeLerArquivo\\TesteTexto.txt"); //File - para apontar para o arquivo que deseja ler.
+            InputStreamReader input = new InputStreamReader(arquivo); //FileReader - para iniciar um leitor de arquivo
+            BufferedReader br = new BufferedReader(input); //BufferedReader - para poder ler linha por linha do arquivo e jogar em uma lista.
+
+            String linha;
+
+            do{
+                linha = br.readLine();
+                if(linha != null){
+                    String[] palavra = linha.split(";");
+
+                    System.out.println("Nova linha-------------");
+                    for(int i = 0; i < palavra.length; i++){
+                        System.out.println("Palavra lida = "+palavra[i]);
+                    }
+                }
+            } while (linha != null);
+        } catch (Exception e){
+            System.out.println("Erro ao ler arquivo");
+        }
     }
 
     /*public void adiciona(int posicao, Object elemento){

@@ -1,7 +1,8 @@
 package listaDuplamenteEncadeada;
 
+
 public class Execucao {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         ListaLigada lista = new ListaLigada();
 
         System.out.println(lista);
@@ -38,5 +39,7 @@ public class Execucao {
         for (int i = 0; i < 1; i++){
             System.out.println(lista);
         }
+
+        lista.lerArquivo();
     }
 }

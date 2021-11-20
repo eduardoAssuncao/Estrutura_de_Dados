@@ -21,6 +21,14 @@ public class PilhaDin implements IPilha{
         return elemento;
     }
 
+    public int consultarTopo(){
+        if (topo == null){
+            System.out.println("Pilha nula");
+            return 0;
+        }
+        return topo.getElemento();
+    }
+
     public boolean isEmpty() {
         return (topo == null);
     }
