@@ -1,8 +1,7 @@
 package listaDuplamenteEncadeada;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.Scanner;
 
 public class ListaLigada {
 
@@ -18,7 +17,7 @@ public class ListaLigada {
     private Node fim;
     private int tamanho;
 
-    public void adiciona(Object info){ // adiciona no fim da lista
+    /*public void adiciona(Object info){ // adiciona no fim da lista
         Node no = new Node();
         //no.info = info;
         no.setInfo(info);
@@ -35,7 +34,7 @@ public class ListaLigada {
             fim = inicio;
         }
         tamanho++;
-    }
+    }*/
 
     public Object removerInicio(){
         if (inicio == null){
@@ -92,7 +91,7 @@ public class ListaLigada {
 
     public void inserirMeio(int id, Object info){
         if(id <= 0){
-            adiciona(info);
+            inserirFim(info);
         } else if (id >= tamanho){
             inserirFim(info);
         } else{
@@ -154,6 +153,25 @@ public class ListaLigada {
         return str;
     }
 
+    /*public void LerArquivo(){
+        File file = new File("C:\\Users\\Kenny\\Documents\\IntelliJProjects\\src\\testeLerArquivo\\TesteTexto.txt");
+            public static String[] LerArquivo(File "C:\\Users\\Kenny\\Documents\\IntelliJProjects\\src\\testeLerArquivo\\TesteTexto.txt") throws FileNotFoundException {
+            String s = "";
+
+            Scanner in = new Scanner(new FileReader( "C:\\Users\\Kenny\\Documents\\IntelliJProjects\\src\\testeLerArquivo\\TesteTexto.txt" ));
+            while (in.hasNextLine()) {
+                String line[] = in.nextLine().split(";"); //aqui depende da formação adotada
+                if(s.equals("")) {
+                    s += line[0];
+                }else {
+                    s += ";" + line[0];
+                }
+
+            }
+
+            return s.split(";"); //retorna um vetor ... observe que a cada linha lida vc já poderia incluir na sua estrutura
+        }
+    }*/
     public void lerArquivo(){
         try{
             FileInputStream arquivo = new FileInputStream("C:\\Users\\Kenny\\Documents\\IntelliJProjects\\src\\testeLerArquivo\\TesteTexto.txt"); //File - para apontar para o arquivo que deseja ler.
@@ -165,10 +183,12 @@ public class ListaLigada {
             do{
                 linha = br.readLine();
                 if(linha != null){
+                    //String[] palavra = linha.split(";");
                     String[] palavra = linha.split(";");
 
                     System.out.println("Nova linha-------------");
                     for(int i = 0; i < palavra.length; i++){
+                        inserirFim(palavra[i]);
                         System.out.println("Palavra lida = "+palavra[i]);
                     }
                 }

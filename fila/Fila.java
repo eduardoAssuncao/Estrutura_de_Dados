@@ -1,36 +1,70 @@
 package fila;
 
 public class Fila {
-    private int[] valores;
-    private int inicio;
-    private int fim;
-    private int total;
+    private Node cabeca;
+    private Node inicio;
+    private int tamanho;
 
-    public Fila() {
-        valores = new int[10];
-        inicio = 0;
-        fim = 0;
-        total = 0;
+    Fila() {
+        cabeca = null;
+        inicio = null;
+        tamanho = 0;
     }
 
-    public void inserir(int elemento) {
-        valores[fim] = elemento;
-        fim = (fim + 1) % valores.length;//resto vai variar de 0 a 10 que são as posições do vetor
-        total ++;
+    Object verificarCabeca() {
+        if (cabeca == null) {
+            return null;
+        }
+        return cabeca.getInfo();
     }
 
-    public int retirar() {
-        int elemento = valores[inicio];
-        inicio = (inicio + 1) % 10;
-        total --;
-        return elemento;
+    boolean vazia() {
+        return inicio == null;
     }
 
-    public boolean isEmpty() {
-        return (total == 0);
+    void inserir(Object info) {
+        Node no = new Node();
+        //no.info = info;
+        no.setInfo(info);
+        //no.proximo = inicio;
+        no.setProximo(inicio);
+        inicio = no;
+        if (tamanho == 0) {
+            cabeca = no;
+        }
+        tamanho++;
     }
 
-    public boolean isFull() {
-        return (total == 10);
+    Object remover() {
+        if (vazia()) {
+            return null;
+        }
+        Object info = cabeca.getInfo();
+        if (tamanho == 1) { // ou inicio == cabeça
+            inicio = null;
+            cabeca = null;
+        } else {
+            Node local = inicio;
+            while (local.getProximo() != cabeca) {
+                local = local.getProximo();
+            }
+            cabeca = local;
+            cabeca.setProximo(null);
+        }
+        tamanho--;
+        return info;
     }
+
+    public Object consultarElem(int id){
+        if (vazia()){
+            return null;
+        }
+        Node aux = inicio;
+        for(int i = 0; i < id; i++){
+            aux = aux.getProximo();
+        }
+        return aux.getInfo();
+    }
+
+    //colocar uma função que busque um objeto por meio de um indice
 }

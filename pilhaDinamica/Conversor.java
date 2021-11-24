@@ -1,6 +1,6 @@
 package pilhaDinamica;
 
-import pilha.Pilha;
+//import pilha.Pilha;
 
 public class Conversor {
     public static void main(String[] args) {
