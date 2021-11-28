@@ -1,17 +1,24 @@
 package arvoreBinariadeBusca;
 
+import javax.swing.text.html.parser.Element;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
+//////DEVEMOS OBSERVAR QUE AS FUNÇÕES DA ÁRVORE BINÁRIA USAM MUITO DA RECURSIVIDADE, ENTÃO DEVEMOS ANALISAR COM CAUTELA CADA FUNÇÃO OBSERVANDO O QUE É FEITA A CADA CHAMADA//////
+
 public class ArvoreBinariaDeBusca {
-    private Elemento ele;
+    private Elemento ele; // Cada elemento iserido é um No . Elemento == Node
     private ArvoreBinariaDeBusca dir;
     private ArvoreBinariaDeBusca esq;
 
-    public ArvoreBinariaDeBusca() {
+    public ArvoreBinariaDeBusca() { // Construtor para inicialização
         this.ele = null;
         this.esq = null;
         this.dir = null;
     }
 
-    public ArvoreBinariaDeBusca(Elemento elem) {
+    public ArvoreBinariaDeBusca(Elemento elem) { // sobrecarga de contrutor para a inicialização com a informação de um valor Elemento elem (que é nada mais nada menos que um valor qualquer inteiro)
         this.ele = elem;
         this.dir = null;
         this.esq = null;
@@ -26,14 +33,12 @@ public class ArvoreBinariaDeBusca {
             if (novo.getValor() < this.ele.getValor()) { // vou inserir na descendencia esquerda
                 if (this.esq == null) { // sou um nó folha
                     this.esq = novaArvore;
-                    //System.out.println("Inseri o elemento " + novo.getValor() + " à esquerda de " + this.ele.getValor());
                 } else {
                     this.esq.inserir(novo); // respassei a responsabilidade para a sub-árvore esquerda
                 }
             } else if (novo.getValor() > this.ele.getValor()) { // vou inserir da descendencia direita
                 if (this.dir == null) { // a direita de "mim" é nulo?
                     this.dir = novaArvore; // sim? então a minha direita vai ser inserido o novo valor
-                    //System.out.println("Inseri o elemento " + novo.getValor() + " à direita de " + this.ele.getValor());
                 } else {
                     this.dir.inserir(novo);// vou para a direita e repito a função até o valor poder ser inserido
                 }
@@ -42,7 +47,7 @@ public class ArvoreBinariaDeBusca {
 
     }
 
-    // remocao do no da arvore
+    // remocao do nó da arvore
     public ArvoreBinariaDeBusca remover(Elemento elem) {
         // primeiro caso - achei o elemento
         if (this.ele.getValor() == elem.getValor()) {
@@ -83,6 +88,40 @@ public class ArvoreBinariaDeBusca {
         return this;
     }
 
+    public void lerArquivo(){ // Função de leitura dos valores a serem inseridos por meio de um arquivo.txt
+        /*
+         * /////EXEMPLO ARQUIVO/////
+         *10
+         *5
+         *3
+         *6
+         *15
+         *12
+         *20
+         */
+        try{
+            FileInputStream arquivo = new FileInputStream("C:\\Users\\Kenny\\Documents\\IntelliJProjects\\src\\testeLerArquivo\\TesteTexto.txt"); //File - para apontar para o arquivo que deseja ler.
+            InputStreamReader input = new InputStreamReader(arquivo); //FileReader - para iniciar um leitor de arquivo
+            BufferedReader br = new BufferedReader(input); //BufferedReader - para poder ler linha por linha do arquivo e jogar em uma lista.
+
+            String linha;
+
+            do{
+                linha = br.readLine();
+                if(linha != null){
+                    String[] palavra = linha.split(";");
+
+                    for(int i = 0; i < palavra.length; i++){
+                        int valores = Integer.parseInt(palavra[i]);
+                        inserir(new Elemento(valores));
+                    }
+                }
+            } while (linha != null);
+        } catch (Exception e){
+            System.out.println("Erro ao ler arquivo");
+        }
+    }
+
     // metodos de controle;
     public boolean isEmpty() {
         return (this.ele == null);
@@ -117,11 +156,11 @@ public class ArvoreBinariaDeBusca {
     //EX:  (D <- B -> E) <- A -> (F <- C -> G)
     public void imprimirPosOrdem() { //é a estratégia de varredura na qual primeiro lê-se os nós da sub-árvore esquerda em pós-ordem, depois os nós da sub-árvore direita em pós-ordem e finalmente o nó raiz
         if (!isEmpty()) {
-            if (this.dir != null) {
-                this.dir.imprimirPosOrdem();
-            }
             if (this.esq != null) {
                 this.esq.imprimirPosOrdem();
+            }
+            if (this.dir != null) {
+                this.dir.imprimirPosOrdem();
             }
             System.out.print(this.ele.getValor() + "  ");
         } // percorro a árvore a esqurda, imprimo os nós, depois percorro a direita, imprimo os nós e, por fim, imprimo a raiz
@@ -155,23 +194,6 @@ public class ArvoreBinariaDeBusca {
     public void setElemento(Elemento ele) {
         this.ele = ele;
     }
-
-    /*public void setDireita(ArvoreBinariaDeBusca dir) {
-        this.dir = dir;
-    }
-
-    public void setEsquerda(ArvoreBinariaDeBusca esq) {
-        this.esq = esq;
-    }
-
-    public ArvoreBinariaDeBusca getDireita() {
-        return this.dir;
-    }
-
-    public ArvoreBinariaDeBusca getEsqueda() {
-        return this.esq;
-    }*/
-
     public Elemento getElemento() {
         return this.ele;
     }

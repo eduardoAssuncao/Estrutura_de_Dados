@@ -1,9 +1,11 @@
 package listaDuplamenteEncadeada;
 
 public class Node {
-    private Object info;
-    private Node proximo;
-    private Node anterior;
+    private Object info; // Variável do tipo Object (pode assumir qualquer valor)
+    private Node proximo; // Nó para o próxmo valor da lista
+    private Node anterior; // Nó para o valor anterior da lista
+
+    /////FUNÇÕES GETS AND SETS/////
 
     public Object getInfo() {
         return info;

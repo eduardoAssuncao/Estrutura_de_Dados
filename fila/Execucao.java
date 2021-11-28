@@ -2,19 +2,20 @@ package fila;
 
 public class Execucao {
     public static void main(String[] args) {
+
+         /*
+         * A funções a baixo são em relação a um arquivo já existente. Você pode realizar a inserção de item por item, mas também pode adicionar um
+         * camilho para o seu arquivo.txt.... Na função LerArquivo, há uma chamada para a função inserir. Caso queira que as informações do
+         * arquivo sejam inseridos de maneira diferente, altere a função do laço da função LerArquivo e os adicione pela classe main (aqui)
+         */
+
         Fila fila = new Fila();
 
-        fila.inserir(1);
-        fila.inserir(2);
-        fila.inserir(3);
-        while(!fila.vazia()){
-            System.out.println(fila.remover());
-        }
+        fila.lerArquivo();
 
-        fila.inserir(4);
-        fila.inserir(5);
-        fila.inserir(6);
-
-        System.out.println("Consulta: "+ fila.consultarElem(0));
+        System.out.println(fila);
+        fila.remover();
+        System.out.println(fila);
+        System.out.println(fila.consultarElem(3));
     }
 }

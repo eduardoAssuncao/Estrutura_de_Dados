@@ -4,6 +4,8 @@ public class Node {
     private Object info;
     private Node proximo;
 
+    //////FUNÇÕES GETS AND SETS/////
+
     public Object getInfo() {
         return info;
     }

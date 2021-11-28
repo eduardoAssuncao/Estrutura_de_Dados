@@ -1,7 +1,7 @@
 package pilhaDinamica;
 
 public interface IPilha {
-    public void push(int elemento);
-    public int pop();
-    public boolean isEmpty();
+    abstract void push(Object elemento);
+    abstract Object pop();
+    abstract boolean isEmpty();
 }

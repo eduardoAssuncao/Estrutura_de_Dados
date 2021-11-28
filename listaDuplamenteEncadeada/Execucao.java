@@ -3,27 +3,17 @@ package listaDuplamenteEncadeada;
 
 public class Execucao {
     public static void main(String[] args){
+
+        /*
+        * A funções a baixo são em relação a um arquivo já existente. Você pode realizar a inserção de item por item, mas também pode adicionar um
+        * camilho para o seu arquivo.txt.... Na função LerArquivo, há uma chamada para a função inserirInicio. Caso queira que as informações do
+        * arquivo sejam inseridos de maneira diferente, altere a função do laço da função LerArquivo e os adicione pela classe main (aqui)
+        */
+
         ListaLigada lista = new ListaLigada();
 
+
         lista.lerArquivo();
-        /*System.out.println(lista);
-        lista.inserirFim(10);
-        System.out.println(lista);
-        lista.inserirFim(11);
-        System.out.println(lista);
-        lista.inserirFim(20);
-        System.out.println(lista);
-
-        lista.inserirMeio(1, 2);
-        System.out.println(lista);
-
-        lista.removerMeio(2);
-        System.out.println(lista);
-
-        lista.removerFim();
-        System.out.println(lista);
-
-        lista.removerInicio();*/
         System.out.println(lista);
 
         lista.removerMeio(2);
@@ -31,42 +21,5 @@ public class Execucao {
 
         lista.removerInicio();
         System.out.println(lista);
-
-
-
-        /*for (int i = 0; i < 6; i++){
-            lista.adiciona("" + (int) (i + 97));
-            System.out.println(lista);
-        }
-
-        System.out.println("--------------------------");
-        lista.removerInicio();
-
-        for (int i = 0; i < 6; i++){
-            System.out.println(lista);
-        }
-
-        System.out.println("--------------------------");
-        lista.inserirFim(200);
-
-        for (int i = 0; i < 1; i++){
-            System.out.println(lista);
-        }
-
-        System.out.println("--------------------------");
-        lista.removerFim();
-
-        for (int i = 0; i < 1; i++){
-            System.out.println(lista);
-        }
-
-        System.out.println("--------------------------");
-        lista.removerMeio(1);
-
-        for (int i = 0; i < 1; i++){
-            System.out.println(lista);
-        }
-
-        lista.lerArquivo();*/
     }
 }

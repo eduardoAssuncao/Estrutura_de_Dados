@@ -1,14 +1,16 @@
 package pilhaDinamica;
 
 public class Node {
-    private int elemento;
-    private Node proximo;
+    private Object elemento; // variável referente ao elemento a ser inserido
+    private Node proximo; // Nó que identifica o proximo elemento
 
-    public void setElemento(int elemento) {
+    //////METODOS GETS AND SETS
+
+    public void setElemento(Object elemento) {
         this.elemento = elemento;
     }
 
-    public int getElemento() {
+    public Object getElemento() {
         return this.elemento;
     }
 
