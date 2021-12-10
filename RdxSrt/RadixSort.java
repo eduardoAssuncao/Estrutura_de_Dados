@@ -3,97 +3,101 @@ package RdxSrt;
 import java.util.Arrays;
 
 public class RadixSort {
-    // Using counting sort to sort the elements in the basis of significant places
-    void countingSort(int array[], int size, int place) {
-        int[] output = new int[size + 1];
-        int max = array[0];
-        for (int i = 1; i < size; i++) {
-            if (array[i] > max) //Descubra o elemento máximo (que seja max) de um determinado array.
-                max = array[i];
-            //System.out.println("Max: "+max);
+    // Utilizamos o Counting Sort para ordenar os elementos levando em consideração o seu lugar significativo
+    void countingSort(int arr[], int tamanho, int posicao) {
+        int[] result = new int[tamanho + 1];
+        int maior = arr[0];
+        for (int i = 1; i < tamanho; i++) {
+            //Devemos descobrir o maior elemento do array.
+            if (arr[i] > maior)
+                maior = arr[i];
+            //System.out.println("Maior: "+maior);
         }
-        int[] count = new int[max + 1]; //Inicialize uma matriz de comprimento max+1 com todos os elementos 0. Esta matriz é usada para armazenar a contagem dos elementos na matriz.
+        //Inicializa uma matriz de comprimento maior+1 com todos os elementos 0.
+        // Este array é usado para armazenar a contagem dos elementos.
+        int[] contagem = new int[maior + 1];
 
-        for (int i = 0; i < max; ++i) { //Tornando todos os elementos do array count igual a 0
-            count[i] = 0;
-            //System.out.println("Count: "+count[i]);
+        //Tornando todos os elementos do array contagem igual a 0
+        for (int i = 0; i < maior; ++i) {
+            contagem[i] = 0;
+            //System.out.println("Count: "+contagem[i]);
         }
 
-        // Calculate count of elements
-        for (int i = 0; i < size; i++) { //Armazene a contagem de cada elemento em seu respectivo índice na count matriz.
-            // Ou seja, a quantidade de vezes que um elemento aparece, sendo que o indice representa o elemento e o valor armazenado a quantidade de aparições
+        // Devemos realizar o calculo da contagem de elementos
+        // Basicamente temos que armazenar a quantidade que um certo elemento aparece em seu respectivo indice no array contagem.
+        // No array contagem, o indice representa o valor e o elemento armazenado dentro do indice é a quantidade de aparicoes.
+        for (int i = 0; i < tamanho; i++) {
             //121, 432, 564, 23, 1, 45, 788
-            //Ex. O indice 0(valor 0) aparece 0 vezes no meu array. o indice 1(valor 1) aparece
-            count[(array[i] / place) % 10]++;
-
-           //System.out.println("Count of elements: "+count[i]);
-            //0 2 1 1 1 1 1
-            //2 3 4 5 6 7
-            //0 2 1 1 1 1 0
-            //1 2 3 4 5 5
+            //Ex. O indice 0(valor 0) aparece 0 vezes no meu array. o indice 1(valor 1) aparece 2 vezes
+            contagem[(arr[i] / posicao) % 10]++;
         }
-        System.out.print("Count of elements:" );
-        System.out.println(Arrays.toString(count));
+        System.out.print("Contagem dos elementos:" );
+        System.out.println(Arrays.toString(contagem)); // teste
 
-        // Calculate cumulative count
-        for (int i = 1; i < 10; i++) { // realiza a contagem acumulativa, somando o valor atual pelo anterior
-            count[i] += count[i - 1];
-            //System.out.println("Cumulative count: "+count[i]);
+        // Realizamos a contagem cumulativa dos elementos, somando o valor atual pelo anterior
+        for (int i = 1; i < 10; i++) {
+            contagem[i] += contagem[i - 1];// contagem do atual mais o anterior
         }
-        System.out.print("Cumulative count:" );
-        System.out.println(Arrays.toString(count));
+        System.out.print("Contagem comulativa:" );
+        System.out.println(Arrays.toString(contagem)); // teste
 
-        // Place the elements in sorted order
-        for (int i = size - 1; i >= 0; i--) {
-            output[count[(array[i] / place) % 10] - 1] = array[i];
-            count[(array[i] / place) % 10]--;
-            //System.out.println("Output: "+output[i]);
-            //System.out.println("Count: "+count[i]);
+        // Posicionando os elementos de maneira ordenada
+        for (int i = tamanho - 1; i >= 0; i--) {
+            // é o reposicionamento dos valores do array levando em cosideração os valores da contagem - 1
+            result[contagem[(arr[i] / posicao) % 10] - 1] = arr[i];
+            //result[contagem[(arr[7]/posicao) % 10] - 1] = arr[7];
+            //resulta[contagem[(8/1)%10] - 1] = 8;
+            //result[contagem[7]] = 8 OBS: o indice 7 da contagem é representado pelo elemento
+            System.out.println("Contagem [7]:" + contagem[7]);
+            System.out.println("i: "+i);
+            System.out.println("result: "+result[i]);
+            System.out.println("arr[i]"+ arr[i]);
+            // atualização da contagem para a próxima chamada
+            contagem[(arr[i] / posicao) % 10]--;
         }
-        System.out.print("Count of elements:" );
-        System.out.println(Arrays.toString(output));
-        System.out.print("Count:" );
-        System.out.println(Arrays.toString(count));
+        System.out.print("Saida:" );
+        System.out.println(Arrays.toString(result));
+        System.out.print("Contagem:" );
+        System.out.println(Arrays.toString(contagem));
 
-        //System.out.print("[");
-        for (int i = 0; i < size; i++) {
-            array[i] = output[i];
-            //System.out.print(array[i]+ ",");
+        // Coloquemos o array de saída no array original
+        for (int i = 0; i < tamanho; i++) {
+            arr[i] = result[i];
         }
-        System.out.println(Arrays.toString(array));
-        //System.out.print("]");
+        System.out.println(Arrays.toString(arr));
     }
 
-    // Function to get the largest element from an array
-    int getMax(int array[], int n) {
-        int max = array[0];
+    // Função para pegar o maior elemento do array
+    int maiorElemento(int array[], int n) {
+        int maior = array[0];
         for (int i = 1; i < n; i++)
-            if (array[i] > max)
-                max = array[i];
-        return max;
+            if (array[i] > maior)
+                maior = array[i];
+        return maior;
     }
 
-    // Main function to implement radix sort
-    void radixSort(int array[], int size) {
-        // Get maximum element
-        int max = getMax(array, size);
+    // Função de implementação do Radix Sort
+    void radixSort(int arr[], int tamanho) {
+        // Encontar o maior elemento presente dentro do array
+        int maior = maiorElemento(arr, tamanho);
 
-        // Apply counting sort to sort elements based on place value.
-        for (int place = 1; max / place > 0; place *= 10) // realiza o loop três vezes. 3 é a quantidade de dígitos no maior valor
-            countingSort(array, size, place);
+        // Utilização do Counting Sort para ordenar os elementos tomando como base sua posição
+        // o laço realiza o loop levando em consideração a quantidade de dígitos presente no maior valor.
+        for (int posicao = 1; maior / posicao > 0; posicao *= 10)
+            countingSort(arr, tamanho, posicao);
     }
 
     // Driver code
     public static void main(String args[]) {
-        int[] data = { 121, 432, 564, 23, 1, 45, 788 };
-        //int[] data = { 4, 2, 2, 8, 3, 3, 1 };
-        int size = data.length;
-        System.out.println("Length: "+data.length);
-        RadixSort rs = new RadixSort();
-        System.out.println(Arrays.toString(data));
-        rs.radixSort(data, size);
+        int[] dados = { 121, 432, 564, 23, 1, 45, 788 };
+        //int[] dados = { 4, 2, 2, 8, 3, 3, 1 };
+        int tamanho = dados.length;
+        System.out.println("Comprimento: "+dados.length);
+        RadixSort radixSort = new RadixSort();
+        System.out.println(Arrays.toString(dados));
+        radixSort.radixSort(dados, tamanho);
         System.out.println();
-        System.out.println("Sorted Array in Ascending Order: ");
-        System.out.println(Arrays.toString(data));
+        System.out.println("Ordenação em ordem crescente: ");
+        System.out.println(Arrays.toString(dados));
     }
 }
