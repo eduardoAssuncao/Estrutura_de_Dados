@@ -71,10 +71,10 @@ public class Recursao {
 
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int arr[] = {120, 150, 15, 1234, 2};
         Recursao recursao = new Recursao();
         System.out.println("Maior: "+recursao.maior(arr, 5));
         System.out.println("Menor: "+recursao.menor(arr, 5));
-    }
+    }*/
 }
