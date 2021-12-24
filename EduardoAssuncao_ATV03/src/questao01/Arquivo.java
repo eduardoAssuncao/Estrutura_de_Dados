@@ -8,7 +8,6 @@ import java.io.IOException;
 public class Arquivo {
     public static String Read(String Caminho){
         String conteudo = "";
-        int contador = 0;
         try {
             FileReader arq = new FileReader(Caminho);
             BufferedReader lerArq = new BufferedReader(arq);
