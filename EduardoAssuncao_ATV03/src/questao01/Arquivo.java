@@ -1,4 +1,4 @@
-package questao02;
+package questao01;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -6,11 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Arquivo {
-    public static String read(String caminho){
+    public static String Read(String Caminho){
         String conteudo = "";
         int contador = 0;
         try {
-            FileReader arq = new FileReader(caminho);
+            FileReader arq = new FileReader(Caminho);
             BufferedReader lerArq = new BufferedReader(arq);
             String linha="";
             try {
