@@ -30,13 +30,11 @@ public class MapaHash {
                 reg = reg.getProximo();
             }
             //se ele é o último da lista
-            //if (reg.getProximo() == null){
                 if(reg.getKey() == registro.getKey()){
                     reg.setValue(registro.getValue());
                     System.out.println("É o último! Registro Existente - atualizando");
                     return;
                 }
-            //}
             reg.setProximo(registro); // coloquei o novo registro na última posição
             System.out.println("Novo Registro!");
         }
