@@ -16,14 +16,14 @@ public class MapaHash {
 
             // especial para tratar o primeiro elemento
             if (reg.getKey() == registro.getKey()){ // o registro que quero inseir é o mesmo que
-                reg.setValue(reg.getValue()); // apenas substituo o valor
+                reg.setNome(reg.getNome()); // apenas substituo o valor
                 System.out.println("É o primeiro Registro Existente - atualizando...");
                 return;
             }
             // se ele tá no meio da lista
             while (reg.getProximo() != null){
                 if (reg.getKey() == registro.getKey()){ // o registro que quero inseir é o mesmo que
-                    reg.setValue(registro.getValue()); // apenas substituo o valor
+                    reg.setNome(registro.getNome()); // apenas substituo o valor
                     System.out.println("Tá no meio da lista - Registro Existente - atualizando");
                     return;
                 }
@@ -31,7 +31,7 @@ public class MapaHash {
             }
             //se ele é o último da lista
                 if(reg.getKey() == registro.getKey()){
-                    reg.setValue(registro.getValue());
+                    reg.setNome(registro.getNome());
                     System.out.println("É o último! Registro Existente - atualizando");
                     return;
                 }
@@ -45,10 +45,10 @@ public class MapaHash {
         r.setKey(key);
         int posicao = r.hashCode();
         Registro resultado = valores[posicao]; // tento encontrar o registro
-        if (resultado != null && resultado.getKey() == key){ // é o que eu tô proxutando?
+        if (resultado != null && resultado.getKey() == key){ // é o que eu tô procutando?
             return resultado;
         }else{
-            while(resultado != null){ // enquanto tiverr gente na lista...
+            while(resultado != null){ // enquanto tiver gente na lista...
                 resultado = resultado.getProximo(); // vou para o próximo
                 if (resultado != null && resultado.getKey() == key){ // é o cara?
                     return resultado; // se for, retorno ele

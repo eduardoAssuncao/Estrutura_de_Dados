@@ -1,3 +1,1 @@
-12345; Hélder Pereira Borges; helder@helder.com.br
-33333; Fulano da Silva Sauro;fulano@fulano.com.br
-54321; Beltrano dos Anzóis;beltrano@beltrano.com.br
+12345;Hélder Pereira Borges; helder@helder.com.br;33333;Fulano da Silva Sauro;fulano@fulano.com.br;54321;Beltrano dos Anzóis;beltrano@beltrano.com.br;20201;Eduardo Assunção; eduardo@assuncao.ifma.br;20202;Regiana Barbosa; regiana@barbosa.ifma.br;
