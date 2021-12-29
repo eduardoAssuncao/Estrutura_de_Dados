@@ -9,22 +9,22 @@ public class MapaHash {
         int posicao = registro.hashCode();
         if(valores[posicao] == null){
             valores[posicao] = registro;
-            System.out.println("=======Posicao vazia!! Novo Registro");
+            //System.out.println("=======Posicao vazia!! Novo Registro");
         }else{
-            System.out.println("Ops... Colisao >>>");
+            //System.out.println("Ops... Colisao >>>");
             Registro reg = valores[posicao];
 
             // especial para tratar o primeiro elemento
             if (reg.getKey() == registro.getKey()){ // o registro que quero inseir é o mesmo que
                 reg.setNome(reg.getNome()); // apenas substituo o valor
-                System.out.println("É o primeiro Registro Existente - atualizando...");
+                //System.out.println("É o primeiro Registro Existente - atualizando...");
                 return;
             }
             // se ele tá no meio da lista
             while (reg.getProximo() != null){
                 if (reg.getKey() == registro.getKey()){ // o registro que quero inseir é o mesmo que
                     reg.setNome(registro.getNome()); // apenas substituo o valor
-                    System.out.println("Tá no meio da lista - Registro Existente - atualizando");
+                    //System.out.println("Tá no meio da lista - Registro Existente - atualizando");
                     return;
                 }
                 reg = reg.getProximo();
@@ -32,11 +32,11 @@ public class MapaHash {
             //se ele é o último da lista
                 if(reg.getKey() == registro.getKey()){
                     reg.setNome(registro.getNome());
-                    System.out.println("É o último! Registro Existente - atualizando");
+                    //System.out.println("É o último! Registro Existente - atualizando");
                     return;
                 }
             reg.setProximo(registro); // coloquei o novo registro na última posição
-            System.out.println("Novo Registro!");
+            //System.out.println("Novo Registro!");
         }
     }
 
