@@ -115,14 +115,14 @@ public class ArvoreAVL {
         ArvoreAVL filhoDir = this.getDireita(); //20
         ArvoreAVL filhoDoFilho = filhoDir.getEsqueda(); //15
         ArvoreAVL noInserido = filhoDoFilho.getDireita(); //17
-        // parte 1: alinhar os caras
+        // parte 1: alinhar os nós
 
-        filhoDir.setEsquerda(noInserido); // 17 filhoDir passa a ter a esquerda o nó inserido
-        filhoDoFilho.setDireita(filhoDir); // 20 o filhoDoFilho passa a ter a direita o filhoDir
-        this.setDireita(filhoDoFilho); //15 e a atual raiz tem como direita o filhoDoFilho
+        filhoDir.setEsquerda(noInserido); // filhoDir passa a ter a esquerda o nó inserido
+        filhoDoFilho.setDireita(filhoDir); // o filhoDoFilho passa a ter a direita o filhoDir
+        this.setDireita(filhoDoFilho); // e a atual raiz tem como direita o filhoDoFilho
 
         // parte 2: tornar o filho à direita a nova raiz
-        ArvoreAVL novoFilhoDireita = this.getDireita(); // 15 armazeno o valor do filho a direita
+        ArvoreAVL novoFilhoDireita = this.getDireita(); // armazeno o valor do filho a direita
         arvore.setDireita(null); // seto o valor a direita da raiz como nullo
         novoFilhoDireita.setEsquerda(arvore); // seto o valor a esquerda do novoFilhoDDireita como o valor da raiz
         return novoFilhoDireita; // o novoFilhoireita passa a ser a nova raiz
@@ -130,23 +130,23 @@ public class ArvoreAVL {
 
     public ArvoreAVL rotacaoDuplaEsquerda(){
         ArvoreAVL arvore = this; //10
-        ArvoreAVL filhoEsq = this.getEsqueda(); //20
-        ArvoreAVL filhoDoFilho = filhoEsq.getDireita(); //15
-        ArvoreAVL noInserido = filhoDoFilho.getEsqueda(); //17
-        // parte 1: alinhas os caras
+        ArvoreAVL filhoEsq = this.getEsqueda();
+        ArvoreAVL filhoDoFilho = filhoEsq.getDireita();
+        ArvoreAVL noInserido = filhoDoFilho.getEsqueda();
+        // parte 1: alinhas os nós
 
-        filhoEsq.setDireita(noInserido); // 17
-        filhoDoFilho.setEsquerda(filhoEsq); // 20
-        this.setEsquerda(filhoDoFilho); //15
+        filhoEsq.setDireita(noInserido);
+        filhoDoFilho.setEsquerda(filhoEsq);
+        this.setEsquerda(filhoDoFilho);
 
         // parte 2: tornar o filho à direita a nova raiz
-        ArvoreAVL novoFilhoEsquerda = this.getEsqueda(); // 15
+        ArvoreAVL novoFilhoEsquerda = this.getEsqueda();
         arvore.setEsquerda(null);
         novoFilhoEsquerda.setDireita(arvore);
         return novoFilhoEsquerda;
     }
 
-    //inserção na árvore
+    //--------INSERÇÃO NA ÁRVORE
     public ArvoreAVL inserir(Elemento novo) {
         if (isEmpty()) {
             this.ele = novo;
@@ -155,14 +155,12 @@ public class ArvoreAVL {
             if (novo.getValor() < this.ele.getValor()) { // vou inserir na descendencia esquerda
                 if (this.esq == null) { // sou um nó folha
                     this.esq = novaArvore;
-                    //System.out.println("Inseri o elemento " + novo.getValor() + " à esquerda de " + this.ele.getValor());
                 } else {
                     this.esq = this.esq.inserir(novo); // respassei a responsabilidade para a sub-árvore esquerda
                 }
             } else if (novo.getValor() > this.ele.getValor()) { // vou inserir da descendencia direita
                 if (this.dir == null) {
                     this.dir = novaArvore;
-                    //System.out.println("Inseri o elemento " + novo.getValor() + " à direita de " + this.ele.getValor());
                 } else {
                     this.dir = this.dir.inserir(novo);
                 }
@@ -171,7 +169,7 @@ public class ArvoreAVL {
         return this;
     }
 
-    // remocao do no da arvore
+    //-----------REMOCAO DO NÓ DA ÁRVORE
     public ArvoreAVL remover(Elemento elem) {
         // primeiro caso - achei o elemento
         if (this.ele.getValor() == elem.getValor()) {
@@ -212,7 +210,7 @@ public class ArvoreAVL {
         return this;
     }
 
-    // metodos de controle;
+    //--------MÉTODOS DE CONTROLE;
     public boolean isEmpty() {
         return (this.ele == null);
     }
@@ -259,6 +257,7 @@ public class ArvoreAVL {
             return false;
         }
         if (this.ele.getValor() == valor) {
+            System.out.println("Valor: "+valor);
             return true;
         } else {
             if (valor < this.ele.getValor()) {
@@ -278,7 +277,7 @@ public class ArvoreAVL {
         }
     }
 
-    // gets e sets
+    //----------GETS E SETS
     public void setElemento(Elemento ele) {
         this.ele = ele;
     }
@@ -311,11 +310,11 @@ public class ArvoreAVL {
         return this.ele;
     }
 
-    // método de depuração
+    //-----------MÉTODO DE DEPURACAO
     public String printArvore(int level){
         String str = this.toString()+"\n";
         for (int i = 0; i < level; i++){
-            str += "\t";
+            str += "\t"; // \t é utilizado para dar um tab antes da informação exibida
         }
         if (this.esq != null){
             str += "+-ESQ: "+this.esq.printArvore(level + 1);
