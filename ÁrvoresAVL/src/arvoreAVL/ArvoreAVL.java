@@ -1,9 +1,5 @@
 package arvoreAVL;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-
 public class ArvoreAVL {
     private Elemento ele;
     private ArvoreAVL dir;
@@ -50,23 +46,20 @@ public class ArvoreAVL {
         if (this.esq != null) this.esq.calcularBalanceamento();
     }
 
-    //--------métodos de verificação e rotação
+    //--------MÉTODOS DE VERIFICAÇÃO E ROTAÇÃO
     public  ArvoreAVL verificaBalanceamento(){
         if (this.bal >= 2 || this.bal <= -2){
             if (this.bal >= 2){
                 if (this.bal * this.dir.getBal() > 0){ // se o resultado da multiplicação for maior que 0, significa que os valores tem mesmo sinal
-                    //System.out.println("Rotação Simples Direita");
                     return rotacaoSimplesDireita();
                 }else{
-                    //System.out.println("Rotação Dupla Direita"); // se for menor que 0, os valores tem sinal diferente
+                    // se for menor que 0, os valores tem sinal diferente
                     return rotacaoDuplaDireita();
                 }
             }else{ // bal <= -2
                 if (this.bal * this.esq.getBal() > 0){
-                    //System.out.println("Rotação Simples Esquerda");
                     return rotacaoSimplesEsquerda();
                 }else{
-                    //System.out.println("Rotação Dupla Esquerda");
                     return rotacaoDuplaEsquerda();
                 }
             }
@@ -111,17 +104,17 @@ public class ArvoreAVL {
     }
 
     public ArvoreAVL rotacaoDuplaDireita(){
-        ArvoreAVL arvore = this; //10
-        ArvoreAVL filhoDir = this.getDireita(); //20
-        ArvoreAVL filhoDoFilho = filhoDir.getEsqueda(); //15
-        ArvoreAVL noInserido = filhoDoFilho.getDireita(); //17
-        // parte 1: alinhar os nós
+        ArvoreAVL arvore = this;
+        ArvoreAVL filhoDir = this.getDireita();
+        ArvoreAVL filhoDoFilho = filhoDir.getEsqueda();
+        ArvoreAVL noInserido = filhoDoFilho.getDireita();
+        // Processo 1: alinhar os nós
 
         filhoDir.setEsquerda(noInserido); // filhoDir passa a ter a esquerda o nó inserido
         filhoDoFilho.setDireita(filhoDir); // o filhoDoFilho passa a ter a direita o filhoDir
         this.setDireita(filhoDoFilho); // e a atual raiz tem como direita o filhoDoFilho
 
-        // parte 2: tornar o filho à direita a nova raiz
+        // Processo 2: tornar o filho à direita a nova raiz
         ArvoreAVL novoFilhoDireita = this.getDireita(); // armazeno o valor do filho a direita
         arvore.setDireita(null); // seto o valor a direita da raiz como nullo
         novoFilhoDireita.setEsquerda(arvore); // seto o valor a esquerda do novoFilhoDDireita como o valor da raiz
@@ -129,17 +122,17 @@ public class ArvoreAVL {
     }
 
     public ArvoreAVL rotacaoDuplaEsquerda(){
-        ArvoreAVL arvore = this; //10
+        ArvoreAVL arvore = this;
         ArvoreAVL filhoEsq = this.getEsqueda();
         ArvoreAVL filhoDoFilho = filhoEsq.getDireita();
         ArvoreAVL noInserido = filhoDoFilho.getEsqueda();
-        // parte 1: alinhas os nós
+        // Processo 1: alinhas os nós
 
         filhoEsq.setDireita(noInserido);
         filhoDoFilho.setEsquerda(filhoEsq);
         this.setEsquerda(filhoDoFilho);
 
-        // parte 2: tornar o filho à direita a nova raiz
+        // Processo 2: tornar o filho à direita a nova raiz
         ArvoreAVL novoFilhoEsquerda = this.getEsqueda();
         arvore.setEsquerda(null);
         novoFilhoEsquerda.setDireita(arvore);

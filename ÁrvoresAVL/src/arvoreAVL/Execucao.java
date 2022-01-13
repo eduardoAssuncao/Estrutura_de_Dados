@@ -39,12 +39,14 @@ public class Execucao {
         arvore.imprimirPreOrdem();
         System.out.print("\n");
         System.out.println("|======================================================|");
-        System.out.println("Buscando valor:");
+        System.out.println("Buscando valor 17:");
         System.out.println("Valor encontrado? "+ arvore.busca(17));
 
         System.out.println("|======================================================|");
-        System.out.println("Removendo o valor 2:");
-        arvore.remover(new Elemento(2));
+        System.out.println("Removendo o valor 11, 18 e 17:");
+        arvore.remover(new Elemento(11));
+        arvore.remover(new Elemento(18));
+        arvore.remover(new Elemento(17));
         System.out.print("=>Árvore Não Balanceada (PreOrdem): ");
         arvore.imprimirPreOrdem();
         System.out.print("\n");
@@ -54,7 +56,10 @@ public class Execucao {
         System.out.print("=>Árvore Balanceada (PreOrdem): ");
         arvore.imprimirPreOrdem();
 
-
+        System.out.print("\n");
+        System.out.println("|======================================================|");
+        System.out.println("Buscando valor 17:");
+        System.out.println("Valor encontrado? "+ arvore.busca(17));
 
     }
 }
